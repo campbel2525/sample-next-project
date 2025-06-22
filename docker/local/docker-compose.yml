@@ -1,0 +1,69 @@
+services:
+  # ---------------------------------
+  # database
+  # ---------------------------------
+  db:
+    image: mysql/mysql-server:8.0
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - db-data80:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - shared-network
+      - default
+
+  # ---------------------------------
+  # mailhog
+  # ---------------------------------
+  mailhog:
+    image: mailhog/mailhog
+    platform: linux/amd64
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  # ---------------------------------
+  # migration
+  # ---------------------------------
+  migration:
+    restart: "no"
+    tty: true
+    build:
+      context: ${MIGRATION_CONTEXT}
+      dockerfile: ${MIGRATION_DOCKERFILE}
+    # ports:
+    #   - "0.0.0.0:3000:3000" # webサーバー
+    volumes:
+      - ${MIGRATION_CONTEXT}:/project
+    networks:
+      - shared-network
+      - default
+
+  # ---------------------------------
+  # user-front
+  # ---------------------------------
+  user-front:
+    restart: "no"
+    tty: true
+    build:
+      context: ${USER_FRONT_CONTEXT}
+      dockerfile: ${USER_FRONT_DOCKERFILE}
+    ports:
+      - "0.0.0.0:3001:3001" # webサーバー
+    volumes:
+      - ${USER_FRONT_CONTEXT}:/project
+      - ../../apps/migration/prisma:/project/prisma
+      - ../../apps/migration/src/factories:/project/src/factories
+    networks:
+      - shared-network
+      - default
+
+volumes:
+  db-data80:
+
+networks:
+  shared-network:
+    name: ${PROJECT_NAME}-network
