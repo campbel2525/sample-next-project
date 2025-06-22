@@ -56,7 +56,7 @@ services:
     volumes:
       - ${USER_FRONT_CONTEXT}:/project
       - ../../apps/migration/prisma:/project/prisma
-      - ../../apps/migration/src/factories:/project/src/factories
+      - ../../apps/migration/factories:/project/src/factories
     networks:
       - shared-network
       - default
