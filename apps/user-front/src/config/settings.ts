@@ -11,6 +11,8 @@ export const APP_PAGES = {
     login: '/auth/login',
     logout: '/auth/logout',
     register: '/auth/register',
+    profile: '/auth/profile',
+    changePassword: '/auth/change-password',
   },
 } as const
 

@@ -2,6 +2,7 @@
 
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { APP_PAGES } from '@/config/settings'
 
 export default function Home() {
   const { data: session, status } = useSession()
@@ -58,10 +59,20 @@ export default function Home() {
                   ✅ NextAuth.jsによる認証が正常に動作しています！
                 </p>
               </div>
-              <div className="space-y-2">
-                <p><strong>ユーザーID:</strong> {session.user.id}</p>
-                <p><strong>メールアドレス:</strong> {session.user.email}</p>
-                <p><strong>名前:</strong> {session.user.name}</p>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <p><strong>ユーザーID:</strong> {session.user.id}</p>
+                  <p><strong>メールアドレス:</strong> {session.user.email}</p>
+                  <p><strong>名前:</strong> {session.user.name}</p>
+                </div>
+                <div className="pt-4 border-t border-gray-200">
+                  <Link
+                    href={APP_PAGES.auth.profile}
+                    className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    マイページ
+                  </Link>
+                </div>
               </div>
             </div>
           ) : (
