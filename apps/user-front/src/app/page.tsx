@@ -54,17 +54,7 @@ export default function Home() {
               <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
                 ダッシュボード
               </h2>
-              <div className="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-4">
-                <p className="text-green-800 dark:text-green-200">
-                  ✅ NextAuth.jsによる認証が正常に動作しています！
-                </p>
-              </div>
               <div className="space-y-4">
-                <div className="space-y-2 text-gray-900 dark:text-white">
-                  <p><strong>ユーザーID:</strong> {session.user.id}</p>
-                  <p><strong>メールアドレス:</strong> {session.user.email}</p>
-                  <p><strong>名前:</strong> {session.user.name}</p>
-                </div>
                 <div className="pt-4 border-t border-gray-200 dark:border-gray-600">
                   <Link
                     href={APP_PAGES.auth.profile}
