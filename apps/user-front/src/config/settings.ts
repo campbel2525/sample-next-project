@@ -12,6 +12,7 @@ export const APP_PAGES = {
     logout: '/auth/logout',
     register: '/auth/register',
     profile: '/auth/profile',
+    editProfile: '/auth/edit-profile',
     changePassword: '/auth/change-password',
   },
 } as const

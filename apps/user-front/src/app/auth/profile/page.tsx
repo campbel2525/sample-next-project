@@ -89,6 +89,12 @@ export default function ProfilePage() {
                 </h2>
                 <div className="space-y-3">
                   <Link
+                    href={APP_PAGES.auth.editProfile}
+                    className="block w-full px-4 py-3 bg-green-600 text-white text-center rounded hover:bg-green-700 transition-colors"
+                  >
+                    プロフィールを編集
+                  </Link>
+                  <Link
                     href={APP_PAGES.auth.changePassword}
                     className="block w-full px-4 py-3 bg-blue-600 text-white text-center rounded hover:bg-blue-700 transition-colors"
                   >
