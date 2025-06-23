@@ -10,20 +10,20 @@ services:
     volumes:
       - db-data80:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3308:3306
     networks:
       - shared-network
       - default
 
-  # ---------------------------------
-  # mailhog
-  # ---------------------------------
-  mailhog:
-    image: mailhog/mailhog
-    platform: linux/amd64
-    ports:
-      - "8025:8025"
-      - "1025:1025"
+  # # ---------------------------------
+  # # mailhog
+  # # ---------------------------------
+  # mailhog:
+  #   image: mailhog/mailhog
+  #   platform: linux/amd64
+  #   ports:
+  #     - "8025:8025"
+  #     - "1025:1025"
 
   # ---------------------------------
   # migration

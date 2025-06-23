@@ -10,10 +10,10 @@ import crypto from 'crypto'
 export type NewUser = Omit<User, 'id'>
 
 /**
- * SHA-512 ハッシュ関数
+ * SHA-256 ハッシュ関数
  */
 function hashPassword(password: string): string {
-  return crypto.createHash('sha512').update(password).digest('hex')
+  return crypto.createHash('sha256').update(password).digest('hex')
 }
 
 /**

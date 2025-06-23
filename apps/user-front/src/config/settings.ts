@@ -1,37 +1,44 @@
 // クッキーのプレフィックス
-const COOKIE_PREFIX = 'admin_front'
+export const COOKIE_PREFIX = 'user-front'
 
-// アクセストークンのクッキー名
-export const ACCESS_TOKEN_COOKIE_NAME = `${COOKIE_PREFIX}_access_token`
-
-// リフレッシュトークンのクッキー名
-export const REFRESH_TOKEN_COOKIE_NAME = `${COOKIE_PREFIX}_refresh_token`
-
-// login用のワンタイムパスワードのクッキー名
-export const ONE_TIME_PASSWORD_LOGIN_COOKIE_NAME = `${COOKIE_PREFIX}_one_time_password_login_uuid`
-
-// アクセストークンの更新の必要性をチェックするためのバッファ
-export const ACCESS_TOKEN_UPDATE_BUFFER = 60 * 2 // 2分
-
-// CSRFトークン
-export const CSRF_TOKEN_COOKIE_NAME = `${COOKIE_PREFIX}_csrf_token`
-export const CSRF_TOKEN_HEADER_NAME = 'X-CSRF-TOKEN'
-export const CSRF_TOKEN_EXPIRES_SECONDS = 900 // 15分
-
-// フロントエンドのパス
-export const frontPaths = {
+// アプリケーション全体のページパス設定
+export const APP_PAGES = {
+  // 基本ページ
   home: '/',
-  login: '/accounts/login',
-  loginConfirm: '/accounts/login/confirm',
-  users: '/users',
-}
 
-// ログインページのパス
-export const loginPagePath = frontPaths.login
+  // 認証関連
+  auth: {
+    login: '/auth/login',
+    logout: '/auth/logout',
+    register: '/auth/register',
+  },
+} as const
 
-// 認証が必要ないパス
-export const authNotRequiredPaths = [
-  frontPaths.home,
-  frontPaths.login,
-  frontPaths.loginConfirm,
-]
+// NextAuth.js認証設定
+export const NEXT_AUTH_CONFIG = {
+  // 使用するテーブル/モデル名
+  userModel: 'user',
+
+  // フィールド名のマッピング
+  fields: {
+    id: 'id',
+    email: 'email',
+    password: 'password',
+    name: 'name',
+  },
+
+  // パスワードハッシュ化方式
+  passwordHash: 'sha256' as const,
+
+  // セッション設定
+  session: {
+    maxAge: 60 * 60 * 24 * 30, // 30日
+  },
+
+  // NextAuth.js用のクッキー名設定
+  cookies: {
+    sessionToken: `${COOKIE_PREFIX}-next-auth.session-token`,
+    callbackUrl: `${COOKIE_PREFIX}-next-auth.callback-url`,
+    csrfToken: `${COOKIE_PREFIX}-next-auth.csrf-token`,
+  },
+} as const

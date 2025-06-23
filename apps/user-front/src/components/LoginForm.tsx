@@ -1,12 +1,15 @@
 'use client'
 
 import { useState } from 'react'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -14,24 +17,22 @@ export default function LoginForm() {
     setError('')
 
     try {
-      const response = await fetch('/api/accounts/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
       })
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        setError(data.error || 'ログインに失敗しました')
+      if (result?.error) {
+        setError('メールアドレスまたはパスワードが正しくありません')
         return
       }
 
-      // ログイン成功時の処理
-      console.log('ログイン成功:', data.user)
-      alert('ログインに成功しました！')
+      if (result?.ok) {
+        // ログイン成功時の処理
+        console.log('ログイン成功')
+        router.push('/') // ホームページにリダイレクト
+      }
     } catch (err) {
       setError('ログイン中にエラーが発生しました')
       console.error('Login error:', err)
