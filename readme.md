@@ -1,20 +1,9 @@
-気をつけて欲しいのが、このプロジェクトはモノレポとなっていて複数のプロジェクトがここに入っています
-apps 配下に下記のプロジェクトが入っています
+# 注意点
 
-- migration
-- user-front
-
-特に注意して欲しいのが
-prisma の管理は
-
-- migration
-
-でしていて、ユーザーのアプリケーションは
-
-- user-front
-
-でしています
-docker の設定で
-`apps/migration/prisma`と`apps/user-front/prima`をリンクしています
-
-そのため
+- ものレポ
+- apps
+  - migration
+  - user-front
+- prisma は apps/migration で管理
+- apps/user-front/prisma と apps/migration/prisma がマウントされている
+  - prisma を変える場合は migration の方を変える
