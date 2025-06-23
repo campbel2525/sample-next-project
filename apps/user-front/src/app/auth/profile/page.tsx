@@ -23,17 +23,17 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white shadow rounded-lg">
+        <div className="bg-white dark:bg-gray-800 shadow rounded-lg">
           {/* ヘッダー */}
-          <div className="px-6 py-4 border-b border-gray-200">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-600">
             <div className="flex justify-between items-center">
-              <h1 className="text-2xl font-bold text-gray-900">マイページ</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">マイページ</h1>
               <div className="flex gap-2">
                 <Link
                   href={APP_PAGES.home}
-                  className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+                  className="px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   ホームに戻る
                 </Link>
@@ -51,31 +51,31 @@ export default function ProfilePage() {
           <div className="px-6 py-6">
             <div className="space-y-6">
               <div>
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   プロフィール情報
                 </h2>
                 <div className="grid grid-cols-1 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       ユーザーID
                     </label>
-                    <div className="mt-1 text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded">
+                    <div className="mt-1 text-sm font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded">
                       {session.user.id}
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       メールアドレス
                     </label>
-                    <div className="mt-1 text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded">
+                    <div className="mt-1 text-sm font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded">
                       {session.user.email}
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       名前
                     </label>
-                    <div className="mt-1 text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded">
+                    <div className="mt-1 text-sm font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded">
                       {session.user.name}
                     </div>
                   </div>
@@ -84,7 +84,7 @@ export default function ProfilePage() {
 
               {/* アクション */}
               <div>
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   アカウント設定
                 </h2>
                 <div className="space-y-3">

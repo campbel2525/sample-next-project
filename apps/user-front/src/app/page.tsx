@@ -18,15 +18,15 @@ export default function Home() {
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
-        <header className="mb-8 p-4 bg-white rounded-lg shadow">
+        <header className="mb-8 p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               サンプルアプリケーション
             </h1>
             <div className="flex items-center gap-4">
               {session ? (
                 <>
-                  <span className="text-gray-700">
+                  <span className="text-gray-700 dark:text-gray-300">
                     こんにちは、{session.user.name || session.user.email}さん
                   </span>
                   <button
@@ -48,24 +48,24 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="bg-white rounded-lg shadow p-6">
+        <main className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           {session ? (
             <div>
-              <h2 className="text-xl font-semibold mb-4 text-gray-900">
+              <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
                 ダッシュボード
               </h2>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-                <p className="text-green-800">
+              <div className="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-4">
+                <p className="text-green-800 dark:text-green-200">
                   ✅ NextAuth.jsによる認証が正常に動作しています！
                 </p>
               </div>
               <div className="space-y-4">
-                <div className="space-y-2">
+                <div className="space-y-2 text-gray-900 dark:text-white">
                   <p><strong>ユーザーID:</strong> {session.user.id}</p>
                   <p><strong>メールアドレス:</strong> {session.user.email}</p>
                   <p><strong>名前:</strong> {session.user.name}</p>
                 </div>
-                <div className="pt-4 border-t border-gray-200">
+                <div className="pt-4 border-t border-gray-200 dark:border-gray-600">
                   <Link
                     href={APP_PAGES.auth.profile}
                     className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -77,10 +77,10 @@ export default function Home() {
             </div>
           ) : (
             <div>
-              <h2 className="text-xl font-semibold mb-4 text-gray-900">
+              <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
                 ようこそ
               </h2>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 このアプリケーションを使用するにはログインが必要です。
               </p>
               <Link
