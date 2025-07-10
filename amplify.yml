@@ -1,0 +1,40 @@
+version: 1
+applications:
+  - appRoot: apps/user_front
+    env:
+      # Amplifyのビルドイメージにデフォルトで含まれるキャッシュ設定を無効にし、
+      # 下記のcacheセクションで明示的に指定したパスのみをキャッシュするようにします。
+      # これにより、モノレポ構成でのキャッシュ効率が向上します。
+      - name: AMPLIFY_MONOREPO_APP_ROOT
+        value: apps/user_front
+      - name: AMPLIFY_DIFF_DEPLOY
+        value: 'false'
+    phases:
+      preBuild:
+        commands:
+          # 1. ルートで全パッケージの依存関係をインストール
+          - npm ci
+      build:
+        commands:
+          # 2. SSMから環境変数を取得し、user_frontアプリの.envファイルとして保存
+          - aws ssm get-parameter --name "/amplify/user-front/.env" --with-decryption --query "Parameter.Value" --output text > .env
+          # 3. データベースのマイグレーションを実行
+          - npx prisma migrate deploy
+          # 4. user_frontアプリをビルド
+          - npm run build
+    artifacts:
+      baseDirectory: .next
+      files:
+        - '**/*'
+    cache:
+      paths:
+        # Next.jsのビルドキャッシュを保存
+        - .next/cache/**/*
+  - appRoot: packages/db
+  - appRoot: packages/factories
+  - appRoot: packages/seeders
+  - appRoot: packages/tsconfig
+cache:
+  paths:
+    # ルートのnode_modulesをキャッシュ
+    - node_modules/**/*
